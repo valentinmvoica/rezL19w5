@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rezL19w5", "rezL19w5\rezL19w5.csproj", "{C087448B-7B52-4EB0-BDDF-D973012613E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rezL19w5", "rezL19w5\rezL19w5.csproj", "{C087448B-7B52-4EB0-BDDF-D973012613E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{041870B7-77CC-4FC8-A84A-C111BE1F530C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{041870B7-77CC-4FC8-A84A-C111BE1F530C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rezL19w5Tests", "rezL19w5Tests\rezL19w5Tests.csproj", "{30AEE403-9DC7-4704-8FE1-0B22BA6AC933}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{041870B7-77CC-4FC8-A84A-C111BE1F530C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{041870B7-77CC-4FC8-A84A-C111BE1F530C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{041870B7-77CC-4FC8-A84A-C111BE1F530C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30AEE403-9DC7-4704-8FE1-0B22BA6AC933}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30AEE403-9DC7-4704-8FE1-0B22BA6AC933}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30AEE403-9DC7-4704-8FE1-0B22BA6AC933}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30AEE403-9DC7-4704-8FE1-0B22BA6AC933}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

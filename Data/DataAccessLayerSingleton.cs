@@ -1,34 +1,21 @@
 ﻿using Data.Exceptions;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
 namespace Data
 {
-    public class DataAccessLayerSingleton
+    public class DataAccessLayerService : IDataAccessLayerService
     {
-        #region singleton
-        private DataAccessLayerSingleton()
+        private readonly StudentsDbContext ctx;
+        public DataAccessLayerService(StudentsDbContext ctx)
         {
+            this.ctx = ctx;
         }
-        private static DataAccessLayerSingleton instance;
-        public static DataAccessLayerSingleton Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new DataAccessLayerSingleton();
-                }
-                return instance;
-            }
-        }
-        #endregion
 
         #region seed
         public void Seed()
         {
-            using var ctx = new StudentsDbContext();
-
             ctx.Add(new Student
             {
                 Nume = "Marin Chitac",
@@ -79,20 +66,11 @@ namespace Data
         }
         #endregion
 
-        public IEnumerable<Student> GetAllStudents()
-        {
-            using var ctx = new StudentsDbContext();
-            return ctx.Studenti.ToList();
-        }
-        public Student GetStudentById(int id)
-        {
-            using var ctx = new StudentsDbContext();
-            return ctx.Studenti.FirstOrDefault(s => s.Id == id);
-        }
+        public IEnumerable<Student> GetAllStudents() => ctx.Studenti.ToList();
+        public Student GetStudentById(int id) => ctx.Studenti.FirstOrDefault(s => s.Id == id);
 
         public Student CreateStudent(Student student)
         {
-            using var ctx = new StudentsDbContext();
 
             if (ctx.Studenti.Any(s => s.Id == student.Id))
             {
@@ -104,12 +82,8 @@ namespace Data
 
             return student;
         }
-
         public Student UpdateStudent(Student studentToUpdate)
         {
-            using var ctx = new StudentsDbContext();
-
-
             var student = ctx.Studenti.FirstOrDefault(s => s.Id == studentToUpdate.Id);
             if (student == null)
             {
@@ -125,10 +99,7 @@ namespace Data
         }
         public bool UpdateOrCreateStudentAddress(int studentId, Adresa nouaAdresa)
         {
-            using var ctx = new StudentsDbContext();
-
-
-            var student = ctx.Studenti.Include(s=>s.Adresa).FirstOrDefault(s => s.Id == studentId);
+            var student = ctx.Studenti.Include(s => s.Adresa).FirstOrDefault(s => s.Id == studentId);
             if (student == null)
             {
                 //throw exception
@@ -151,8 +122,6 @@ namespace Data
 
         public void DeleteStudent(int studentId)
         {
-            using var ctx = new StudentsDbContext();
-
             var student = ctx.Studenti.FirstOrDefault(s => s.Id == studentId);
 
             if (student == null)
@@ -162,6 +131,19 @@ namespace Data
 
             ctx.Studenti.Remove(student);
 
+            ctx.SaveChanges();
+        }
+
+        public void DeleteStudent2(int studentId)
+        {
+            var student = ctx.Studenti.FirstOrDefault(s => s.Id == studentId);
+
+            if (student == null)
+            {
+                throw new InvalidIdException($"student not found {studentId}");
+            }
+
+            ctx.Studenti.Remove(student);
             ctx.SaveChanges();
         }
 

@@ -14,12 +14,17 @@ namespace rezL19w5.Controllers
     [ApiController]
     public class StudentiController : ControllerBase
     {
+        private readonly IDataAccessLayerService dal;
+        public StudentiController(IDataAccessLayerService dal)
+        {
+            this.dal = dal;
+        }
         /// <summary>
         /// Initializeaza DB-ul
         /// </summary>
         [HttpPost("seed")]
         public void Seed() =>
-            DataAccessLayerSingleton.Instance.Seed();
+            dal.Seed();
 
         /// <summary>
         /// Returns all the students in the db
@@ -27,11 +32,12 @@ namespace rezL19w5.Controllers
         [HttpGet]
         public IEnumerable<StudentToGetDto> GetAllStudents()
         {
-            var allStudents = DataAccessLayerSingleton.Instance.GetAllStudents();
+            var allStudents = dal.GetAllStudents();
 
             return allStudents.Select(s => s.ToDto()).ToList();
         }
 
+       
         /// <summary>
         /// Gets a student by id
         /// </summary>
@@ -47,7 +53,7 @@ namespace rezL19w5.Controllers
             
             try
             {
-                return Ok(DataAccessLayerSingleton.Instance.GetStudentById(id).ToDto());
+                return Ok(dal.GetStudentById(id).ToDto());
             }
             catch (InvalidIdException ex)
             {
@@ -64,7 +70,7 @@ namespace rezL19w5.Controllers
         /// <returns>created student data</returns>
         [HttpPost]
         public StudentToGetDto CreateStudent([FromBody] StudentToCreateDto studentToCreate) =>
-            DataAccessLayerSingleton.Instance.CreateStudent(studentToCreate.ToEntity()).ToDto();
+            dal.CreateStudent(studentToCreate.ToEntity()).ToDto();
 
         /// <summary>
         /// Updates a student
@@ -73,7 +79,7 @@ namespace rezL19w5.Controllers
         /// <returns></returns>
         [HttpPatch]
         public StudentToGetDto UpdateStudent([FromBody] StudentToUpdateDto studentToUpdate) =>
-            DataAccessLayerSingleton.Instance.UpdateStudent(studentToUpdate.ToEntity()).ToDto();
+            dal.UpdateStudent(studentToUpdate.ToEntity()).ToDto();
 
 
         /// <summary>
@@ -87,7 +93,7 @@ namespace rezL19w5.Controllers
         public IActionResult UpdateStudentAddress([FromRoute] int id, [FromBody] AddressToUpdateDto addressToUpdate)
         {
 
-            if (DataAccessLayerSingleton.Instance.UpdateOrCreateStudentAddress(id, addressToUpdate.ToEntity()))
+            if (dal.UpdateOrCreateStudentAddress(id, addressToUpdate.ToEntity()))
             {
                 return Created("succeess", null);
             }
@@ -104,7 +110,7 @@ namespace rezL19w5.Controllers
             }
             try
             {
-                DataAccessLayerSingleton.Instance.DeleteStudent(id);
+                dal.DeleteStudent(id);
             }
             catch (InvalidIdException ex)
             {
