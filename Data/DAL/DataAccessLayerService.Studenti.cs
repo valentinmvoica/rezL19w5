@@ -1,9 +1,10 @@
-﻿using Data.Exceptions;
+﻿using Data.DAL;
+using Data.Exceptions;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
 
-namespace Data
+namespace Data.DAL
 {
     public partial class DataAccessLayerService : IDataAccessLayerService
     {

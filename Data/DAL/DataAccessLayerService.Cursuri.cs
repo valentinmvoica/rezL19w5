@@ -1,11 +1,12 @@
-﻿using Data.Models;
+﻿using Data.DAL;
+using Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data
+namespace Data.DAL
 {
     public partial class DataAccessLayerService : IDataAccessLayerService
     {

@@ -1,6 +1,5 @@
-﻿using Data;
+﻿using Data.DAL;
 using Data.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace rezL19w5.Controllers

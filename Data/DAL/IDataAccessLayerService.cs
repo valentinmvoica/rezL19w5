@@ -1,6 +1,6 @@
 ﻿using Data.Models;
 
-namespace Data
+namespace Data.DAL
 {
     public interface IDataAccessLayerService
     {
