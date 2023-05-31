@@ -44,7 +44,14 @@ namespace rezL19w5.Controllers
 
         public ActionResult<StudentToGetDto> GetStudentById([Range(10, int.MaxValue)] int id)
         {
-            return Ok(dal.GetStudentById(id).ToDto());
+            try
+            {
+                return Ok(dal.GetStudentById(id).ToDto());
+            }
+            catch (InvalidIdException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
             

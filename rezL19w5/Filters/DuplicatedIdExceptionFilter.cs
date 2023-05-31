@@ -16,7 +16,7 @@ namespace rezL19w5.Filters
             {
                 context.Result = new ObjectResult(ex.Message)
                 {
-                    StatusCode = StatusCodes.Status400BadRequest
+                    StatusCode = StatusCodes.Status409Conflict
                 };
 
                 context.ExceptionHandled = true;
