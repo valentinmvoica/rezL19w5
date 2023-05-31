@@ -19,13 +19,7 @@ namespace rezL19w5.Controllers
         {
             this.dal = dal;
         }
-        /// <summary>
-        /// Initializeaza DB-ul
-        /// </summary>
-        [HttpPost("seed")]
-        public void Seed() =>
-            dal.Seed();
-
+       
         /// <summary>
         /// Returns all the students in the db
         /// </summary>
