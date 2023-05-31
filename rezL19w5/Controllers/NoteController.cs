@@ -1,4 +1,5 @@
 ﻿using Data;
+using Data.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using rezL19w5.Dtos;
@@ -19,7 +20,17 @@ namespace rezL19w5.Controllers
         /// </summary>
         /// <param name="nota"></param>
         [HttpPost]
-        public void AddNota([FromBody] NotaToCreateDto nota) =>
-            dataAccessLayerService.AcordaNota(nota.Valoare, nota.StudentId, nota.CursId);
+        public IActionResult AddNota([FromBody] NotaToCreateDto nota)
+        {
+            try
+            {
+                dataAccessLayerService.AcordaNota(nota.Valoare, nota.StudentId, nota.CursId);
+                return Ok();
+            }
+            catch (InvalidIdException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

@@ -31,28 +31,20 @@ namespace rezL19w5.Controllers
             return allStudents.Select(s => s.ToDto()).ToList();
         }
 
-       
+
         /// <summary>
         /// Gets a student by id
         /// </summary>
         /// <param name="id">id of the student</param>
         /// <returns>student data</returns>
         [HttpGet("/id/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(StudentToGetDto))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(StudentToGetDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
-        
-        public ActionResult<StudentToGetDto> GetStudentById([Range(10,int.MaxValue)]int id)
+
+        public ActionResult<StudentToGetDto> GetStudentById([Range(10, int.MaxValue)] int id)
         {
-            
-            try
-            {
-                return Ok(dal.GetStudentById(id).ToDto());
-            }
-            catch (InvalidIdException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            return Ok(dal.GetStudentById(id).ToDto());
         }
 
             
