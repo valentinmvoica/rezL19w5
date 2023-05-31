@@ -14,14 +14,21 @@ namespace Data
         }
 
         public IEnumerable<Student> GetAllStudents() => ctx.Studenti.ToList();
-        public Student GetStudentById(int id) => ctx.Studenti.FirstOrDefault(s => s.Id == id);
+        public Student GetStudentById(int id) {
+            var student = ctx.Studenti.FirstOrDefault(s => s.Id == id);
+            if (student == null)
+            {
+                throw new InvalidIdException($"invalid student id {id}");
+            }
+            return student;
+        }
 
         public Student CreateStudent(Student student)
         {
 
             if (ctx.Studenti.Any(s => s.Id == student.Id))
             {
-                //todo throw exception
+                throw new DuplicatedIdException($"duplicated student id");
             }
 
             ctx.Add(student);
@@ -57,7 +64,6 @@ namespace Data
             {
                 student.Adresa = new Adresa();
                 created = true;
-
             }
             student.Adresa.Numar = nouaAdresa.Numar;
             student.Adresa.Strada = nouaAdresa.Strada;
