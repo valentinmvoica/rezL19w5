@@ -16,7 +16,7 @@ namespace Data.DAL
             }
             if (!ctx.Cursuri.Any(s => s.Id == cursId))
             {
-                throw new InvalidIdException($"id curs invalid {studentId}");
+                throw new InvalidIdException($"id curs invalid {cursId}");
             }
 
             ctx.Note.Add(new Nota { Valoare = valoare, StudentId = studentId, CursId=cursId });
