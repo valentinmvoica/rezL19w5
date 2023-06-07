@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.DAL
 {
-    public partial class DataAccessLayerService : IDataAccessLayerService
+    internal partial class DataAccessLayerService : IDataAccessLayerService
     {
         public Curs AddCurs(string numeCurs)
         {

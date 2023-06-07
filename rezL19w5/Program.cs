@@ -1,5 +1,6 @@
 using Data;
 using Data.DAL;
+using Data.Extensions;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
 using rezL19w5.Filters;
@@ -12,9 +13,7 @@ var connString = builder.Configuration.GetConnectionString("SqlDbConnectionStrin
 var custom = builder.Configuration["MyCustomField"].ToString();
 
 // Add services to the container.
-builder.Services.AddDbContext<StudentsDbContext>(options => options.UseSqlServer(connString));
-
-builder.Services.AddScoped<IDataAccessLayerService, DataAccessLayerService>();
+builder.Services.AddDataAccessLayer(connString);
 
 builder.Services.AddControllers(options =>
 {

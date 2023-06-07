@@ -6,7 +6,10 @@ using System.Runtime.CompilerServices;
 
 namespace Data.DAL
 {
-    public partial class DataAccessLayerService : IDataAccessLayerService
+    /// <summary>
+    /// Data access layer - implemented with C#
+    /// </summary>
+    internal partial class DataAccessLayerService : IDataAccessLayerService
     {
         private readonly StudentsDbContext ctx;
         public DataAccessLayerService(StudentsDbContext ctx)

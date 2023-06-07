@@ -6,8 +6,9 @@ using System.Runtime.CompilerServices;
 
 namespace Data.DAL
 {
-    public partial class DataAccessLayerService : IDataAccessLayerService
+    internal partial class DataAccessLayerService : IDataAccessLayerService
     {
+        
         public void AcordaNota(int valoare, int studentId, int cursId)
         {
             if (!ctx.Studenti.Any(s=>s.Id == studentId))

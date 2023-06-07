@@ -22,14 +22,8 @@ namespace rezL19w5.Controllers
         [HttpPost]
         public IActionResult AddNota([FromBody] NotaToCreateDto nota)
         {
-            try
-            {
                 dataAccessLayerService.AcordaNota(nota.Valoare, nota.StudentId, nota.CursId);
                 return Ok();
-            }
-            catch (InvalidIdException e)
-            {
-                return BadRequest(e.Message);
             }
         }
     }

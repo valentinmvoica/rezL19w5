@@ -42,17 +42,8 @@ namespace rezL19w5.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
 
-        public ActionResult<StudentToGetDto> GetStudentById([Range(10, int.MaxValue)] int id)
-        {
-            try
-            {
-                return Ok(dal.GetStudentById(id).ToDto());
-            }
-            catch (InvalidIdException e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
+        public ActionResult<StudentToGetDto> GetStudentById([Range(10, int.MaxValue)] int id)=>
+            Ok(dal.GetStudentById(id).ToDto());
 
             
 
