@@ -6,7 +6,7 @@ namespace Data.DAL
     {
         Student CreateStudent(Student student);
         void DeleteStudent(int studentId);
-        IEnumerable<Student> GetAllStudents();
+        IEnumerable<Student> GetAllStudents(bool includeNote = false);
         Student GetStudentById(int id);
         void Seed();
         bool UpdateOrCreateStudentAddress(int studentId, Adresa nouaAdresa);

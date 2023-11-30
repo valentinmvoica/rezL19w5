@@ -17,7 +17,17 @@ namespace Data.DAL
             this.ctx = ctx;
         }
 
-        public IEnumerable<Student> GetAllStudents() => ctx.Studenti.ToList();
+        public IEnumerable<Student> GetAllStudents(bool includeNote=true) { 
+            if (includeNote)
+            {
+                return ctx.Studenti.Include(s=>s.Note).ToList();
+            }
+            else
+            {
+                return ctx.Studenti.ToList();
+            }
+        }
+
         public Student GetStudentById(int id) {
             var student = ctx.Studenti.FirstOrDefault(s => s.Id == id);
             if (student == null)

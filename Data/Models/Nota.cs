@@ -12,6 +12,7 @@ namespace Data.Models
 
         public int Valoare { get; set; }
         public DateTime OraAcordarii { get; set; }
+
         public int? CursId { get; set; }
         public Curs Curs { get; set; }
 

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using rezL19w5.Dtos;
 using rezL19w5.Utils;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace rezL19w5.Controllers
@@ -39,12 +40,31 @@ namespace rezL19w5.Controllers
         /// <returns>student data</returns>
         [HttpGet("/id/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(StudentToGetDto))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
 
         public ActionResult<StudentToGetDto> GetStudentById([Range(10, int.MaxValue)] int id)=>
             Ok(dal.GetStudentById(id).ToDto());
 
+        [HttpGet("statistics")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<StudentStatisticsDto>))]
+        public IActionResult GetStudentsStatistics()
+        {
+            var students = dal.GetAllStudents(true)
+                .ToList();
+
+            return Ok(
+                students.Select(s =>
+                {
+                    return new StudentStatisticsDto
+                    {
+                        Id = s.Id,
+                        Nume = s.Nume,
+                        Varsta = s.Varsta,
+                        Media = s.Note.Average(n => n.Valoare)
+                    };
+                }).ToList()
+                );
+        }
             
 
         /// <summary>
